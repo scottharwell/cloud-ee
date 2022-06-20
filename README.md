@@ -1,4 +1,4 @@
-[![Build CI](https://github.com/scottharwell/azure-ee/actions/workflows/build.yml/badge.svg?branch=v1.0.14)](https://github.com/scottharwell/azure-ee/actions/workflows/build.yml)
+[![Build CI](https://github.com/scottharwell/cloud-ee/actions/workflows/build.yml/badge.svg?branch=v1.0.0)](https://github.com/scottharwell/cloud-ee/actions/workflows/build.yml)
 
 # Cloud Content Execution Environment
 
