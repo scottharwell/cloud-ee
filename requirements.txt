@@ -1,4 +1,8 @@
+# AWS Dependencies
 boto3
+awscli
+
+# Azure dependencies
 packaging
 requests[security]
 xmltodict
