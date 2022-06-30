@@ -19,7 +19,6 @@ collections:
   - name: https://github.com/ansible-content-lab/cloud.aws_roles.git
     version: main
     type: git
-roles:
-  - name: ansible_on_clouds.aoc_demo_setup
-    src: https://github.com/scottharwell/aoc_demo_setup.git
+  - name: https://github.com/scottharwell/ansible_on_clouds.setup_and_config.git
     version: main
+    type: git
