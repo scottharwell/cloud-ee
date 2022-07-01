@@ -53,7 +53,3 @@ azure-mgmt-recoveryservices==0.4.0
 azure-mgmt-recoveryservicesbackup==0.6.0
 azure-mgmt-notificationhubs==2.0.0
 azure-mgmt-eventhub==2.0.0
-
-# OCI
-oci
-oci-cli
