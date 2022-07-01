@@ -1,6 +1,6 @@
 # AWS Dependencies
-boto3
-awscli
+botocore>=1.20.0
+boto3>=1.17.0
 
 # Azure dependencies
 packaging
@@ -55,6 +55,5 @@ azure-mgmt-notificationhubs==2.0.0
 azure-mgmt-eventhub==2.0.0
 
 # OCI
-jmespath
 oci
 oci-cli
