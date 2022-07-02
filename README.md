@@ -21,10 +21,7 @@ This requires Docker to build EEs. Podman does not function with these steps on 
 1. Clone this repository.
 2. Run `ansible-builder create` to create the `context` directory.
 3. Change into the newly created `context` directory.
-4. Open the newly created file `Containerfile`.
-5. Add `--platform=linux/amd64` to each `FROM` statement since most quay images are only built for the `linux/amd64` platform.
-    * Statements will look like: `FROM --platform=amd64 $EE_BASE_IMAGE as galaxy`
-6. Using `docker buildx`, which is capable of building multi-architecture containers, to build an image that can be used on both `amd64` and `ARM64/aarch64` (M1 and other ARM) CPUs.
+4. Using `docker buildx`, which is capable of building multi-architecture containers, to build an image that can be used on both `amd64` and `ARM64/aarch64` (M1 and other ARM) CPUs.
 
 ```bash
 export REGISTRY=quay.io/scottharwell
