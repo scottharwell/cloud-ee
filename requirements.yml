@@ -8,6 +8,8 @@ collections:
     version: 21.2.0
   - name: community.aws
     version: 4.0.0
+  - name: community.general
+    version: 5.2.0
   - name: https://github.com/ansible-collections/amazon.cloud.git
     version: 0.1.0
     type: git

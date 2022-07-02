@@ -12,10 +12,27 @@ dependencies:
   python: requirements.txt
 
 additional_build_steps:
-  # prepend: |
-  #   RUN echo This is a pre-install command!
+  prepend: |
+    RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
+    RUN dnf install -y https://packages.microsoft.com/config/rhel/8/packages-microsoft-prod.rpm
+    RUN echo -e "[azure-cli] \
+        name=Azure CLI \
+        baseurl=https://packages.microsoft.com/yumrepos/azure-cli \
+        enabled=1 \
+        gpgcheck=1 \
+        gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | tee /etc/yum.repos.d/azure-cli.repo
+    RUN dnf install -y unzip azure-cli
+    
   append: |
-    RUN dnf install -y unzip
+    # Install OCI CLI
+    RUN curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh --output install.sh
+    RUN chmod 755 install.sh
+    RUN ./install.sh --accept-all-defaults
+
+    # Install AWS CLI
+    # The AWS CLI does not function in the current config with ARM64
+    # RUN echo "Installing AWS CLI for architecture: $TARGETARCH"
+    # RUN if [ $TARGETARCH == "arm64" ]; then curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"; else curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"; fi
     RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     RUN unzip awscliv2.zip
     RUN ./aws/install
