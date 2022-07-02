@@ -49,8 +49,8 @@ jobs:
       - name: Create the Containerfile file
         run: ansible-builder create
 
-      - name: Ensure that FROM pulls the amd64 image since there is no arm64 upstream image
-        run: sed -i 's/FROM /FROM --platform=linux\/amd64 /g' context/Containerfile
+      # - name: Ensure that FROM pulls the amd64 image since there is no arm64 upstream image
+      #   run: sed -i 's/FROM /FROM --platform=linux\/amd64 /g' context/Containerfile
 
       - name: Create the Dockerfile file
         run: cp context/Containerfile context/Dockerfile
