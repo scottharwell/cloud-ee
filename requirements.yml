@@ -15,12 +15,12 @@ collections:
     type: git
   - name: oracle.oci
     version: 2.55.0
-  - name: https://github.com/ansible-collections/cloud.azure_roles.git
+  - name: https://github.com/ansible-content-lab/azure.infrastructure_config_demos.git
     version: main
     type: git
-  - name: https://github.com/ansible-content-lab/cloud.aws_roles.git
+  - name: https://github.com/ansible-content-lab/aws.infrastructure_config_demos.git
     version: main
     type: git
-  - name: https://github.com/scottharwell/ansible_on_clouds.setup_and_config.git
+  - name: https://github.com/ansible-content-lab/aoc.controller_demo_config.git
     version: main
     type: git
