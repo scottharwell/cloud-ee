@@ -2,6 +2,7 @@
 collections:
   - name: amazon.aws
     version: 4.0.0
+  - name: ansible.windows
   - name: azure.azcollection
     version: 1.13.0
   - name: awx.awx
