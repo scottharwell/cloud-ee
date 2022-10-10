@@ -22,6 +22,10 @@ additional_build_steps:
         gpgcheck=1 \
         gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | tee /etc/yum.repos.d/azure-cli.repo
     RUN dnf install -y unzip azure-cli
+
+    # Install the Azure Connected Machine Extension
+    RUN az config set extension.use_dynamic_install=yes_without_prompt
+    RUN az extension add --name connectedmachine -y
     
   append: |
     # Install OCI CLI
