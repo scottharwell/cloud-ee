@@ -4,7 +4,7 @@ collections:
     version: 5.0.2
   - name: ansible.windows
   - name: azure.azcollection
-    version: 1.13.0
+    version: 1.14.0
   - name: awx.awx
     version: 21.7.0
   - name: community.aws
