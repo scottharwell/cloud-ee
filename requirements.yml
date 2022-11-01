@@ -6,7 +6,7 @@ collections:
   - name: azure.azcollection
     version: 1.14.0
   - name: awx.awx
-    version: 21.7.0
+    version: 21.8.0
   - name: community.aws
     version: 5.0.0
   - name: community.general
