@@ -16,6 +16,8 @@ collections:
     type: git
   - name: oracle.oci
     version: 3.5.0
+  - name: google.cloud
+    version: 1.0.2
   - name: https://github.com/ansible-content-lab/azure.infrastructure_config_demos.git
     version: main
     type: git
