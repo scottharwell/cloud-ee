@@ -10,7 +10,7 @@ collections:
   - name: community.aws
     version: 5.0.0
   - name: community.general
-    version: 6.0.0
+    version: 6.0.1
   - name: https://github.com/ansible-collections/amazon.cloud.git
     version: 0.2.0
     type: git
