@@ -29,9 +29,18 @@ additional_build_steps:
     
   append: |
     # Install OCI CLI
-    RUN curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh --output install.sh
+    RUN curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh -o install.sh
     RUN chmod 755 install.sh
     RUN ./install.sh --accept-all-defaults
+    RUN rm install.sh
+    RUN echo "export PATH=/home/runner/lib/oracle-cli/bin/:$PATH" >> /home/runner/.bashrc
+
+    # Install the gcloud CLI
+    RUN if [ $TARGETARCH == "arm64" ]; then curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-410.0.0-linux-arm.tar.gz; else curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-410.0.0-linux-x86_64.tar.gz; fi
+    RUN if [ $TARGETARCH == "arm64" ]; then tar -xf google-cloud-cli-410.0.0-linux-arm.tar.gz; else tar -xf google-cloud-cli-410.0.0-linux-x86_64.tar.gz; fi
+    RUN ./google-cloud-sdk/install.sh -q --usage-reporting false
+    RUN echo "export PATH=/runner/google-cloud-sdk/bin/:$PATH" >> /home/runner/.bashrc
+    RUN rm -rf ./google-cloud-cli-410.0.0-linux-x86_64.tar.gz
 
     # Install AWS CLI
     # The AWS CLI does not function in the current config with ARM64
@@ -40,3 +49,7 @@ additional_build_steps:
     RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     RUN unzip awscliv2.zip
     RUN ./aws/install
+    RUN rm ./awscliv2.zip
+
+    # Extra Steps
+    RUN source /home/runner/.bashrc
