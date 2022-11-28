@@ -13,6 +13,7 @@ dependencies:
 
 additional_build_steps:
   prepend: |
+    # Install the Azure CLI
     RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
     RUN dnf install -y https://packages.microsoft.com/config/rhel/8/packages-microsoft-prod.rpm
     RUN echo -e "[azure-cli] \
@@ -26,6 +27,10 @@ additional_build_steps:
     # Install the Azure Connected Machine Extension
     RUN az config set extension.use_dynamic_install=yes_without_prompt
     RUN az extension add --name connectedmachine -y
+
+    # Install the Terraform CLI
+    RUN dnf config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+    RUN dnf install terraform -y
     
   append: |
     # Install OCI CLI

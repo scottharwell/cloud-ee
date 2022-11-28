@@ -5,11 +5,14 @@ collections:
   - name: https://github.com/ansible-collections/amazon.cloud.git
     version: 0.2.0
     type: git
-  - name: ansible.windows
   - name: azure.azcollection
     version: 1.14.0
+  - name: ansible.windows
   - name: awx.awx
     version: 21.8.0
+  - name: https://github.com/ansible-collections/cloud.terraform.git
+    version: 1.0.0
+    type: git
   - name: community.aws
     version: 5.0.0
   - name: community.general

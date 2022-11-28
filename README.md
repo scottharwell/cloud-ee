@@ -10,27 +10,29 @@ This is a simple execution environment definition for cloud deployment testing w
 The following collections are included in this execution environment.
 
 | Collection           | Description                                                 |
-|----------------------|-------------------------------------------------------------|
+| -------------------- | ----------------------------------------------------------- |
 | `amazon.aws`         | Used for AWS automation.                                    |
 | `amazon.cloud`       | Newer AWS collection using the cloud control API.           |
 | `ansible.windows`    | Windows collection for automating Windows servers on Azure. |
-| `azure.azcollection` | Used for Azure automation.                                  |
 | `awx.awx`            | Used for AWX/Automation Controller automation.              |
+| `azure.azcollection` | Used for Azure automation.                                  |
+| `cloud.terraform`    | Used for automating Terraform with Ansible.                 |
 | `community.aws`      | Used for AWS automation.                                    |
 | `community.general`  | Used for Proxmox and other community automation.            |
-| `oracle.oci`         | Used for OCI automation.                                    |
 | `google.cloud`       | Used for Google Cloud automation.                           |
+| `oracle.oci`         | Used for OCI automation.                                    |
 
 ### CLI Tools
 
 The following CLI tools are included in this execution environment.
 
 | Cloud                       | CLI Command |
-|-----------------------------|-------------|
-| AWS                         | `aws`       |
-| Azure                       | `az`        |
-| Google Cloud                | `gcloud`    |
+| --------------------------- | ----------- |
+| Amazon Web Services         | `aws`       |
+| Microsoft Azure             | `az`        |
+| Google Cloud Platform       | `gcloud`    |
 | Oracle Cloud Infrastructure | `oci`       |
+| Terraform                   | `terraform` |
 
 ## Building the Execution Environment
 ### Intel or AMD `amd64` on Linux or Mac
