@@ -57,4 +57,4 @@ azure-mgmt-notificationhubs==7.0.0
 azure-mgmt-eventhub==10.1.0
 
 # OCI Dependencies
-oci>=2.88.0
+oci>=2.89.0
