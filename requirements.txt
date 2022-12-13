@@ -1,6 +1,6 @@
 # AWS Dependencies
-botocore>=1.23.0
-boto3>=1.20.0
+botocore
+boto3
 
 # Azure Dependencies
 packaging
@@ -57,4 +57,7 @@ azure-mgmt-notificationhubs==7.0.0
 azure-mgmt-eventhub==10.1.0
 
 # OCI Dependencies
-oci>=2.89.0
+oci
+
+# Other Dependencies
+pyopenssl>=19.1.0
