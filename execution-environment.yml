@@ -35,12 +35,15 @@ additional_build_steps:
     RUN az extension add --name connectedmachine -y
     
   append: |
+    # Upgrade PIP
+    RUN python3 -m ensurepip --upgrade
+
+    # Install AWS CLI
+    RUN if [ $TARGETARCH == "arm64" ]; then curl -L "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"; else curl -L "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"; fi
+    RUN unzip awscliv2.zip
+    RUN ./aws/install
+
     # Install OCI CLI
     RUN python3 -m venv oracle-cli
     RUN source oracle-cli/bin/activate
     RUN /runner/oracle-cli/bin/pip3 install oci-cli
-
-    # Install AWS CLI
-    RUN python3 -m venv aws-cli
-    RUN source aws-cli/bin/activate
-    RUN /runner/aws-cli/bin/pip3 install awscliv2
