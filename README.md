@@ -2,7 +2,7 @@
 
 # Cloud Content Execution Environment
 
-This is a simple execution environment definition for cloud deployment testing with hyperscaler content collections and other collections and roles from the Ansible team to help incubate cloud content.  It includes the following.
+This is a simple execution environment definition for cloud deployment testing with hyperscaler content collections and other collections and roles from the Ansible team to help incubate cloud content. It includes the following.
 
 ## Included Content
 
@@ -35,11 +35,10 @@ The following CLI tools are included in this execution environment.
 | Oracle Cloud Infrastructure | `oci`       |
 | Terraform                   | `terraform` |
 
-The `aws` and `oci` CLI tools are installed into Python venvs.  To access them, activate the venv for the CLI tool within the container.
+The following CLI tools are installed into Python virtual environments (venv).  To access them, activate the venv for the CLI tool within the container.
 
 | CLI Command | venv Name | Activation Command            |
 | ----------- | --------- | ----------------------------- |
-| `aws`       | `aws-cli` | `source aws-cli/bin/activate` |
 | `oci`       | `oci-cli` | `source oci-cli/bin/activate` |
 
 ## Building the Execution Environment
