@@ -40,5 +40,6 @@ additional_build_steps:
 
     # Install OCI CLI
     RUN python3 -m venv oracle-cli
-    RUN source oracle-cli/bin/activate
+    ENV PATH=/runner/oracle-cli/bin:$PATH
     RUN /runner/oracle-cli/bin/pip3 install oci-cli
+    RUN echo "export PATH=/runner/oracle-cli/bin/:$PATH" >> /home/runner/.bashrc
