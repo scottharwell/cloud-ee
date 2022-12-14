@@ -5,6 +5,7 @@
 This is a simple execution environment definition for cloud deployment testing with hyperscaler content collections and other collections and roles from the Ansible team to help incubate cloud content.  It includes the following.
 
 ## Included Content
+
 ### Ansible Collections
 
 The following collections are included in this execution environment.
@@ -34,7 +35,15 @@ The following CLI tools are included in this execution environment.
 | Oracle Cloud Infrastructure | `oci`       |
 | Terraform                   | `terraform` |
 
+The `aws` and `oci` CLI tools are installed into Python venvs.  To access them, activate the venv for the CLI tool within the container.
+
+| CLI Command | venv Name | Activation Command            |
+| ----------- | --------- | ----------------------------- |
+| `aws`       | `aws-cli` | `source aws-cli/bin/activate` |
+| `oci`       | `oci-cli` | `source oci-cli/bin/activate` |
+
 ## Building the Execution Environment
+
 ### Intel or AMD `amd64` on Linux or Mac
 
 Ansible Builder will function out-of-the-box on `amd64` platforms with Podman or Docker.

@@ -58,6 +58,3 @@ azure-mgmt-eventhub==10.1.0
 
 # OCI Dependencies
 oci
-
-# Other Dependencies
-pyopenssl>=19.1.0

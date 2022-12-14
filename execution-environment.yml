@@ -19,18 +19,16 @@ additional_build_steps:
     # Configure Terraform Repo
     RUN dnf config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 
-    # Install the Azure CLI
+    # Configure Azure CLI Repo
     RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
     RUN dnf install -y https://packages.microsoft.com/config/rhel/8/packages-microsoft-prod.rpm
-    RUN echo -e "[azure-cli] \
-        name=Azure CLI \
-        baseurl=https://packages.microsoft.com/yumrepos/azure-cli \
-        enabled=1 \
-        gpgcheck=1 \
-        gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | tee /etc/yum.repos.d/azure-cli.repo
+    RUN echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | tee /etc/yum.repos.d/azure-cli.repo
+
+    # Configure GCloud Repo
+    RUN echo -e "[google-cloud-cli]\nname=Google Cloud CLI\nbaseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el8-x86_64\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=0\ngpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg" | tee /etc/yum.repos.d/google-cloud-sdk.repo
 
     # Install required repos
-    RUN dnf install -y unzip azure-cli terraform
+    RUN dnf install -y unzip azure-cli google-cloud-cli terraform
 
     # Install the Azure Connected Machine Extension
     RUN az config set extension.use_dynamic_install=yes_without_prompt
@@ -38,26 +36,11 @@ additional_build_steps:
     
   append: |
     # Install OCI CLI
-    RUN curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh -o install.sh
-    RUN chmod 755 install.sh
-    RUN ./install.sh --accept-all-defaults
-    RUN rm install.sh
-
-    # Install the gcloud CLI
-    RUN if [ $TARGETARCH == "arm64" ]; then curl -L https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-410.0.0-linux-arm.tar.gz -o "gcp-cli.tar.gz"; else curl -L https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-410.0.0-linux-x86_64.tar.gz -o "gcp-cli.tar.gz"; fi
-    # RUN curl -L https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-410.0.0-linux-x86_64.tar.gz -o "gcp-cli.tar.gz"
-    RUN tar -xf gcp-cli.tar.gz
-    RUN ./google-cloud-sdk/install.sh -q --usage-reporting false
-    RUN rm gcp-cli.tar.gz
+    RUN python3 -m venv oracle-cli
+    RUN source oracle-cli/bin/activate
+    RUN /runner/oracle-cli/bin/pip3 install oci-cli
 
     # Install AWS CLI
-    RUN if [ $TARGETARCH == "arm64" ]; then curl -L https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip -o "awscliv2.zip"; else curl -L https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o "awscliv2.zip"; fi
-    # RUN curl -L https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o "awscliv2.zip"
-    RUN unzip awscliv2.zip
-    RUN ./aws/install
-    RUN rm awscliv2.zip
-
-    # Extra Steps
-    RUN echo "export PATH=/home/runner/lib/oracle-cli/bin/:/runner/google-cloud-sdk/bin/:$PATH" >> /home/runner/.bashrc
-    RUN source /home/runner/.bashrc
-    RUN pip3 install pyopenssl --upgrade # AWS collection stops functioning without this step
+    RUN python3 -m venv aws-cli
+    RUN source aws-cli/bin/activate
+    RUN /runner/aws-cli/bin/pip3 install awscliv2
