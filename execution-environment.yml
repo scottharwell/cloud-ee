@@ -13,9 +13,6 @@ dependencies:
 
 additional_build_steps:
   prepend: |
-    # Upgrade PIP
-    RUN python3 -m pip install --upgrade pip
-
     # Configure Terraform Repo
     RUN dnf config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 
@@ -35,13 +32,11 @@ additional_build_steps:
     RUN az extension add --name connectedmachine -y
     
   append: |
-    # Upgrade PIP
-    RUN python3 -m ensurepip --upgrade
-
     # Install AWS CLI
     RUN if [ $TARGETARCH == "arm64" ]; then curl -L "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"; else curl -L "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"; fi
     RUN unzip awscliv2.zip
     RUN ./aws/install
+    RUN rm awscliv2.zip
 
     # Install OCI CLI
     RUN python3 -m venv oracle-cli
