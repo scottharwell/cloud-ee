@@ -39,7 +39,7 @@ The following CLI tools are installed into Python virtual environments (venv).  
 
 | CLI Command | venv Name | Activation Command            |
 | ----------- | --------- | ----------------------------- |
-| `oci`       | `oci-cli` | `source oci-cli/bin/activate` |
+| `oci`       | `oci-cli` | `source oracle-cli/bin/activate` |
 
 ## Building the Execution Environment
 
