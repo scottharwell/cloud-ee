@@ -68,13 +68,13 @@ This requires Docker to build EEs. Podman does not function with these steps on 
 3. Change into the newly created `context` directory.
 4. Update the `Containerfile` such that any reference to a container pulls from the `linux/amd64` platform. To do this, run a find and replace to change any `FROM` statement to `FROM --platform=linux/amd64`.
 
-```dockerfile
-ARG EE_BASE_IMAGE=registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.14.1-3
-ARG EE_BUILDER_IMAGE=registry.redhat.io/ansible-automation-platform-22/ansible-builder-rhel8:1.1.0-103
+   ```dockerfile
+   ARG EE_BASE_IMAGE=registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.14.1-3
+   ARG EE_BUILDER_IMAGE=registry.redhat.io/ansible-automation-platform-22/ansible-builder-rhel8:1.1.0-103
 
-FROM --platform=linux/amd64 $EE_BASE_IMAGE as galaxy # This is an example of a manually updated line in the container file
-...
-```
+   FROM --platform=linux/amd64 $EE_BASE_IMAGE as galaxy # This is an example of a manually updated line in the container file
+   ...
+   ```
 
 5. Run `docker buildx`, which is capable of building multi-architecture containers, to build an image that can be used on both `amd64` and `arm64/aarch64` (Apple Silicon and other ARM) CPUs.
 
