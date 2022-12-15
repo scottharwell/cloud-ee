@@ -1,9 +1,9 @@
 ---
 version: 1
 
-# build_arg_defaults:
-  # EE_BASE_IMAGE: "registry.redhat.io/ansible-automation-platform-21/ee-supported-rhel8:1.0.0-6"
-  # EE_BUILDER_IMAGE: "registry.redhat.io/ansible-automation-platform-21/ansible-builder-rhel8:1.0.1-4"
+build_arg_defaults:
+  EE_BASE_IMAGE: registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.14.1-3
+  EE_BUILDER_IMAGE: registry.redhat.io/ansible-automation-platform-22/ansible-builder-rhel8:1.1.0-103
 
 ansible_config: "ansible.cfg"
 
@@ -13,6 +13,9 @@ dependencies:
 
 additional_build_steps:
   prepend: |
+    # Enable Repo Manager
+    RUN microdnf install -y yum-utils
+
     # Configure Terraform Repo
     RUN dnf config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 
@@ -33,7 +36,8 @@ additional_build_steps:
     
   append: |
     # Install AWS CLI
-    RUN if [ $TARGETARCH == "arm64" ]; then curl -L "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"; else curl -L "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"; fi
+    # RUN if [ $TARGETARCH == "arm64" ]; then curl -L "https://awscli.amazonaws.com/awscli-exe-linux-aarch64-2.9.0.zip" -o "awscliv2.zip"; else curl -L "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.9.0.zip" -o "awscliv2.zip"; fi
+    RUN curl -L "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.9.0.zip" -o "awscliv2.zip"
     RUN unzip awscliv2.zip
     RUN ./aws/install
     RUN rm awscliv2.zip
@@ -44,3 +48,6 @@ additional_build_steps:
     ENV PATH=/runner/oracle-cli/bin:$PATH
     RUN /runner/oracle-cli/bin/pip3 install oci-cli
     RUN echo "export PATH=/runner/oracle-cli/bin/:$PATH" >> /home/runner/.bashrc
+
+    # Final Config
+    ENV VIRTUAL_ENV ""
