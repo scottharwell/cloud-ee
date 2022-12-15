@@ -35,7 +35,7 @@ The following CLI tools are included in this execution environment.
 | Oracle Cloud Infrastructure | `oci`       |
 | Terraform                   | `terraform` |
 
-The following CLI tools are installed into Python virtual environments (venv).  To access them, activate the venv for the CLI tool within the container.
+The following CLI tools are installed into Python virtual environments (venv).  To access them within the venv, run the activation command below.
 
 | CLI Command | venv Name | Activation Command            |
 | ----------- | --------- | ----------------------------- |
