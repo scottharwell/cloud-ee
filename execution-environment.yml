@@ -37,7 +37,7 @@ additional_build_steps:
   append: |
     # Install AWS CLI
     # RUN if [ $TARGETARCH == "arm64" ]; then curl -L "https://awscli.amazonaws.com/awscli-exe-linux-aarch64-2.9.0.zip" -o "awscliv2.zip"; else curl -L "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.9.0.zip" -o "awscliv2.zip"; fi
-    RUN curl -L "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.9.0.zip" -o "awscliv2.zip"
+    RUN curl -L "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     RUN unzip awscliv2.zip
     RUN ./aws/install
     RUN rm awscliv2.zip
@@ -51,3 +51,7 @@ additional_build_steps:
 
     # Final Config
     ENV VIRTUAL_ENV ""
+    RUN microdnf clean all  \
+      && rm -rf /var/cache/{dnf,yum} \
+      && rm -rf /var/lib/dnf/history.* \
+      && rm -rf /var/log/*
