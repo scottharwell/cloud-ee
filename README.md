@@ -21,7 +21,7 @@ The following collections are included in this execution environment.
 | `community.aws`      | Used for AWS automation.                                    |
 | `community.general`  | Used for Proxmox and other community automation.            |
 | `google.cloud`       | Used for Google Cloud automation.                           |
-| `linode.cloud`       | Used for Linode Cloud automation.                           |
+| `linode.cloud`       | Used for Linode automation.                                 |
 | `oracle.oci`         | Used for OCI automation.                                    |
 | `vultr.cloud`        | Used for Vultr automation.                                  |
 
@@ -70,7 +70,7 @@ This requires Docker to build EEs. Podman does not function with these steps on 
 3. Run `ansible-builder create --output-filename Dockerfile` to create the `context` directory.
 4. Run `gsed -i 's/FROM/FROM --platform=linux\/amd64/' context/Dockerfile` to ensure that the container will build properly.
 5. Run `cd context`.
-6. Run the following commands below to set your own container registry, version, and then build the container.
+6. Run the commands below to set your own container registry, version, and then build the container.
 
    ```bash
    export REGISTRY=quay.io/scottharwell
