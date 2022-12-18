@@ -2,7 +2,7 @@
 
 # Cloud Content Execution Environment
 
-This is a simple execution environment definition for cloud deployment testing with hyperscaler content collections and other collections and roles from the Ansible team to help incubate cloud content. It includes the following.
+This is execution environment definition for automation against cloud infrastructure providers and other collections and roles from the Ansible team to help incubate cloud content.
 
 ## Included Content
 
@@ -21,7 +21,9 @@ The following collections are included in this execution environment.
 | `community.aws`      | Used for AWS automation.                                    |
 | `community.general`  | Used for Proxmox and other community automation.            |
 | `google.cloud`       | Used for Google Cloud automation.                           |
+| `linode.cloud`       | Used for Linode Cloud automation.                           |
 | `oracle.oci`         | Used for OCI automation.                                    |
+| `vultr.cloud`        | Used for Vultr automation.                                  |
 
 ### CLI Tools
 
@@ -37,8 +39,8 @@ The following CLI tools are included in this execution environment.
 
 The following CLI tools are installed into Python virtual environments (venv).  To access them within the venv, run the activation command below.
 
-| CLI Command | venv Name | Activation Command            |
-| ----------- | --------- | ----------------------------- |
+| CLI Command | venv Name    | Activation Command               |
+| ----------- | ------------ | -------------------------------- |
 | `oci`       | `oracle-cli` | `source oracle-cli/bin/activate` |
 
 ## Building the Execution Environment
@@ -63,27 +65,19 @@ Ansible Builder will function out-of-the-box on `amd64` platforms with Podman or
 
 This requires Docker to build EEs. Podman does not function with these steps on an Apple Silicon Mac at this time.  This process will build a multi-platform container on an Apple Silicon Mac that will then function on either an `amd64` or `arm64` platform.
 
-1. Clone this repository.
-2. Run `ansible-builder create` to create the `context` directory.
-3. Change into the newly created `context` directory.
-4. Update the `Containerfile` such that any reference to a container pulls from the `linux/amd64` platform. To do this, run a find and replace to change any `FROM` statement to `FROM --platform=linux/amd64`.
+1. Run `git clone https://github.com/scottharwell/cloud-ee.git` to clone this repository.
+2. Run `cd cloud-ee` to change into the repository directory.
+3. Run `ansible-builder create --output-filename Dockerfile` to create the `context` directory.
+4. Run `gsed -i 's/FROM/FROM --platform=linux\/amd64/' context/Dockerfile` to ensure that the container will build properly.
+5. Run `cd context`.
+6. Run the following commends below to set your own container registry, version, and then build the container.
 
-   ```dockerfile
-   ARG EE_BASE_IMAGE=registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.14.1-3
-   ARG EE_BUILDER_IMAGE=registry.redhat.io/ansible-automation-platform-22/ansible-builder-rhel8:1.1.0-103
-
-   FROM --platform=linux/amd64 $EE_BASE_IMAGE as galaxy # This is an example of a manually updated line in the container file
-   ...
+   ```bash
+   export REGISTRY=quay.io/scottharwell
+   export VERSION=1.0.0
+   docker buildx build --no-cache --platform linux/arm64,linux/amd64 -t $REGISTRY/cloud-ee:$VERSION -t $REGISTRY/cloud-ee:latest --push .
    ```
 
-5. Run `docker buildx`, which is capable of building multi-architecture containers, to build an image that can be used on both `amd64` and `arm64/aarch64` (Apple Silicon and other ARM) CPUs.
+7. Run `docker pull $REGISTRY/cloud-ee:$VERSION` to pull the image to your machine.
 
-In the example below, change the `REGISTRY` and `VERSION` variables to match your container registry that you intend to push to and a version number to tag the build.
-
-```bash
-export REGISTRY=quay.io/scottharwell
-export VERSION=1.0.0
-docker buildx build --no-cache -f Containerfile --platform linux/arm64,linux/amd64 -t $REGISTRY/cloud-ee:$VERSION -t $REGISTRY/cloud-ee:latest --push .
-```
-
-Once the container is deployed to your container registry, then you can pull the EE down to your Apple Silicon Mac to run natively as an `arm64` container so that `ansible-navigator` can run the container directly, or to Ansible Controller running on `amd64` machines.
+You may now run Ansible playbooks with `ansible-navigator` natively on your Apple Silicon Mac.
