@@ -9,7 +9,7 @@ collections:
     version: 1.14.0
   - name: ansible.windows
   - name: awx.awx
-    version: 21.10.1
+    version: 21.10.2
   - name: cloud.terraform
     version: 1.0.0
   - name: community.aws
