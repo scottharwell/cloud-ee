@@ -51,16 +51,13 @@ jobs:
           password: ${{ secrets.QUAY_PASSWORD }}
 
       - name: Install ansible-builder
-        run: sudo pip3 install ansible-builder
+        run: pip3 install ansible-builder
 
       - name: Create the Containerfile file
-        run: ansible-builder create
+        run: ansible-builder create --output-filename Dockerfile
 
       - name: Ensure that FROM pulls the amd64 image since there is no arm64 upstream image
-        run: sed -i 's/FROM /FROM --platform=linux\/amd64 /g' context/Containerfile
-
-      - name: Create the Dockerfile file
-        run: cp context/Containerfile context/Dockerfile
+        run: sed -i 's/FROM /FROM --platform=linux\/amd64 /g' context/Dockerfile
 
       - name: Build Multiarch Containers
         id: dockerbuild
