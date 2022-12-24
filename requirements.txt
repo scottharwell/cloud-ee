@@ -1,3 +1,7 @@
+# AWS
+botocore
+boto3
+
 # Azure Dependencies (Azure Collection does not have a requirements.txt)
 packaging
 requests[security]
@@ -51,3 +55,6 @@ azure-mgmt-recoveryservices==2.0.0
 azure-mgmt-recoveryservicesbackup==3.0.0
 azure-mgmt-notificationhubs==7.0.0
 azure-mgmt-eventhub==10.1.0
+
+# OCI
+oci
