@@ -25,4 +25,4 @@ collections:
   - name: community.digitalocean
     version: 1.23.0
   - name: vultr.cloud
-    version: 1.5.0
+    version: 1.5.1

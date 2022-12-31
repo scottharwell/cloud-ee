@@ -58,3 +58,6 @@ azure-mgmt-eventhub==10.1.0
 
 # OCI
 oci
+
+# Proxmox
+proxmoxer
