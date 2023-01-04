@@ -24,6 +24,7 @@ The following collections are included in this execution environment.
 | `linode.cloud`       | Used for Linode automation.                                 |
 | `oracle.oci`         | Used for OCI automation.                                    |
 | `vultr.cloud`        | Used for Vultr automation.                                  |
+| `ansible.utils`      | Ansible general utilities.                                  |
 
 ### CLI Tools
 
