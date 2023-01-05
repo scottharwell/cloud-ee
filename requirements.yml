@@ -2,9 +2,8 @@
 collections:
   - name: amazon.aws
     version: 5.1.0
-  - name: https://github.com/ansible-collections/amazon.cloud.git
+  - name: amazon.cloud
     version: 0.2.0
-    type: git
   - name: ansible.utils
     version: 2.8.0
   - name: azure.azcollection
