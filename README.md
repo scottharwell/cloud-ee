@@ -14,6 +14,7 @@ The following collections are included in this execution environment.
 | -------------------- | ----------------------------------------------------------- |
 | `amazon.aws`         | Used for AWS automation.                                    |
 | `amazon.cloud`       | Newer AWS collection using the cloud control API.           |
+| `ansible.utils`      | Ansible general utilities.                                  |
 | `ansible.windows`    | Windows collection for automating Windows servers on Azure. |
 | `awx.awx`            | Used for AWX/Automation Controller automation.              |
 | `azure.azcollection` | Used for Azure automation.                                  |
@@ -24,7 +25,6 @@ The following collections are included in this execution environment.
 | `linode.cloud`       | Used for Linode automation.                                 |
 | `oracle.oci`         | Used for OCI automation.                                    |
 | `vultr.cloud`        | Used for Vultr automation.                                  |
-| `ansible.utils`      | Ansible general utilities.                                  |
 
 ### CLI Tools
 
