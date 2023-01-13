@@ -10,7 +10,7 @@ on:
 
 env:
   REGISTRY: quay.io
-  REGISTRY_USER: scottharwell
+  REGISTRY_USER: itdove
   IMAGE_NAME: cloud-ee
 
 jobs:
