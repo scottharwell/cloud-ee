@@ -1,0 +1,5 @@
+*.md linguist-documentation
+*.yml linguist-detectable=true
+*.yaml linguist-detectable=true
+*.cfg linguist-detectable=true
+*.txt linguist-detectable=true
