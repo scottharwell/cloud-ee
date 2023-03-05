@@ -1,7 +1,7 @@
 ---
 collections:
   - name: amazon.aws
-    version: 5.1.0
+    version: 5.2.0
   - name: amazon.cloud
     version: 0.2.0
   - name: ansible.utils
@@ -9,12 +9,13 @@ collections:
   - name: azure.azcollection
     version: 1.14.0
   - name: ansible.windows
+    version: 1.13.0
   - name: awx.awx
-    version: 21.10.2
+    version: 21.12.0
   - name: cloud.terraform
-    version: 1.0.0
+    version: 1.0.1
   - name: community.aws
-    version: 5.0.0
+    version: 5.2.0
   - name: community.general
     version: 6.4.0
   - name: oracle.oci
