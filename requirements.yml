@@ -15,7 +15,7 @@ collections:
   - name: cloud.terraform
     version: 1.0.1
     type: git
-    source: git@github.com:ansible-collections/cloud.terraform.git
+    source: https://github.com/ansible-collections/cloud.terraform.git
   - name: community.aws
     version: 5.2.0
   - name: community.general
