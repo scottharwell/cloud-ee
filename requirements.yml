@@ -19,7 +19,7 @@ collections:
   - name: community.aws
     version: 5.4.0
   - name: community.general
-    version: 6.4.0
+    version: 6.5.0
   - name: oracle.oci
     version: 4.17.0
   - name: google.cloud
