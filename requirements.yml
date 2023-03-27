@@ -1,7 +1,7 @@
 ---
 collections:
   - name: amazon.aws
-    version: 5.2.0
+    version: 5.4.0
   - name: amazon.cloud
     version: 0.2.0
   - name: ansible.utils
@@ -17,7 +17,7 @@ collections:
     type: git
     source: https://github.com/ansible-collections/cloud.terraform.git
   - name: community.aws
-    version: 5.2.0
+    version: 5.4.0
   - name: community.general
     version: 6.4.0
   - name: oracle.oci
