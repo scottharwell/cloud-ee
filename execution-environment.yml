@@ -2,8 +2,8 @@
 version: 1
 
 build_arg_defaults:
-  EE_BASE_IMAGE: registry.redhat.io/ansible-automation-platform-23/ee-minimal-rhel8:1.0.0-271
-  EE_BUILDER_IMAGE: registry.redhat.io/ansible-automation-platform-23/ansible-builder-rhel8:1.2.0-19
+  EE_BASE_IMAGE: registry.redhat.io/ansible-automation-platform-23/ee-minimal-rhel8:1.0.0-274
+  EE_BUILDER_IMAGE: registry.redhat.io/ansible-automation-platform-23/ansible-builder-rhel8:1.2.0-22
 
 ansible_config: "ansible.cfg"
 
@@ -24,7 +24,7 @@ additional_build_steps:
     RUN dnf install -y https://packages.microsoft.com/config/rhel/8/packages-microsoft-prod.rpm
     RUN echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | tee /etc/yum.repos.d/azure-cli.repo
 
-    # Configure GCloud Repo
+    # Configure Google Cloud Repo
     RUN echo -e "[google-cloud-cli]\nname=Google Cloud CLI\nbaseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el8-x86_64\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=0\ngpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg" | tee /etc/yum.repos.d/google-cloud-sdk.repo
 
     # Install required repos
