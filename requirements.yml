@@ -7,9 +7,7 @@ collections:
   - name: ansible.utils
     version: 2.10.3
   - name: azure.azcollection
-    version: v1.15.0
-    type: git
-    source: https://github.com/ansible-collections/azure.git
+    version: 1.15.0
   - name: ansible.windows
     version: 1.13.0
   - name: awx.awx
