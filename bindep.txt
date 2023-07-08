@@ -1,0 +1,6 @@
+unzip
+wget
+python-dnf
+which
+azure-cli
+google-cloud-cli

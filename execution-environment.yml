@@ -1,40 +1,54 @@
 ---
-version: 1
-
-build_arg_defaults:
-  EE_BASE_IMAGE: registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel9:1.0.0-369
-  EE_BUILDER_IMAGE: registry.redhat.io/ansible-automation-platform-24/ansible-builder-rhel9:3.0.0-39
-
-ansible_config: "ansible.cfg"
+version: 3
 
 dependencies:
   galaxy: requirements.yml
   python: requirements.txt
+  system: bindep.txt
+  ansible_core:
+    package_pip: ansible-core==2.15.1
+  ansible_runner:
+    package_pip: ansible-runner==2.3.3
+  python_interpreter:
+    package_system: "python3.11"
+    python_path: "/usr/bin/python3.11"
+
+images:
+  base_image:
+    name: registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel9:latest
+
+options:
+  package_manager_path: /usr/bin/microdnf
+
+additional_build_files:
+  - src: ansible.cfg
+    dest: configs
 
 additional_build_steps:
-  prepend: |
-    # Enable Repo Manager
-    RUN microdnf install -y yum-utils
+  append_base: |
+    # Update package_pip
+    RUN $PYCMD -m pip install --upgrade pip
 
     # Configure Terraform Repo
-    RUN dnf config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+    RUN echo -e "[hashicorp]\nname=Hashicorp Stable - $basearch\nbaseurl=https://rpm.releases.hashicorp.com/RHEL/8/x86_64/stable\nenabled=1\ngpgcheck=1\ngpgkey=https://rpm.releases.hashicorp.com/gpg" | tee /etc/yum.repos.d/hashicorp.repo
 
     # Configure Azure CLI Repo
-    RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
-    RUN dnf install -y https://packages.microsoft.com/config/rhel/8/packages-microsoft-prod.rpm
     RUN echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | tee /etc/yum.repos.d/azure-cli.repo
 
     # Configure Google Cloud Repo
     RUN echo -e "[google-cloud-cli]\nname=Google Cloud CLI\nbaseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el8-x86_64\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=0\ngpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg" | tee /etc/yum.repos.d/google-cloud-sdk.repo
 
-    # Install required repos
-    RUN dnf install -y unzip azure-cli google-cloud-cli terraform
+  prepend_galaxy: |
+    COPY _build/configs/ansible.cfg /etc/ansible/ansible.cfg
+    ENV ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_URL=https://console.redhat.com/api/automation-hub/content/published/
+    ENV ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+    ARG ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN
 
+  append_final: |
     # Install the Azure Connected Machine Extension
     RUN az config set extension.use_dynamic_install=yes_without_prompt
     RUN az extension add --name connectedmachine -y
-    
-  append: |
+
     # Install AWS CLI
     # RUN if [ $TARGETARCH == "arm64" ]; then curl -L "https://awscli.amazonaws.com/awscli-exe-linux-aarch64-2.9.0.zip" -o "awscliv2.zip"; else curl -L "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.9.0.zip" -o "awscliv2.zip"; fi
     RUN curl -L "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -43,13 +57,10 @@ additional_build_steps:
     RUN rm awscliv2.zip
 
     # Install OCI CLI
-    RUN python3 -m venv oracle-cli
+    RUN /usr/bin/python3.11 -m venv oracle-cli
     ENV VIRTUAL_ENV /runner/oracle-cli
     RUN /runner/oracle-cli/bin/pip3 install oci-cli
-
-    # Final Config
     ENV VIRTUAL_ENV ""
-    RUN microdnf clean all  \
-      && rm -rf /var/cache/{dnf,yum} \
-      && rm -rf /var/lib/dnf/history.* \
-      && rm -rf /var/log/*
+
+    # Output collections list for debugging
+    RUN ansible-galaxy collection list

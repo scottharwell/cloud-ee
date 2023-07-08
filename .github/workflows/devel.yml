@@ -1,12 +1,10 @@
 ---
-name: Build CI
+name: Build CI on development branches
 
-on:
+"on":
   push:
-    # branches:
-    #   - main
-    tags:
-      - 'v*.*.*'
+    branches:
+      - "!main"
 
 env:
   REGISTRY: quay.io
@@ -51,7 +49,7 @@ jobs:
           password: ${{ secrets.QUAY_PASSWORD }}
 
       - name: Install ansible-builder
-        run: pip3 install ansible-builder
+        run: pip3 install ansible-builder>=3.0.0
 
       - name: Create the Containerfile file
         run: ansible-builder create --output-filename Dockerfile
@@ -65,6 +63,8 @@ jobs:
         with:
           context: context/.
           platforms: linux/amd64,linux/arm64
-          push: true
+          push: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN=${{ secrets.ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN }}
