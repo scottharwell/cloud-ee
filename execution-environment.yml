@@ -26,9 +26,6 @@ additional_build_files:
 
 additional_build_steps:
   append_base: |
-    # Update package_pip
-    RUN $PYCMD -m pip install --upgrade pip
-
     # Configure Terraform Repo
     RUN echo -e "[hashicorp]\nname=Hashicorp Stable - $basearch\nbaseurl=https://rpm.releases.hashicorp.com/RHEL/8/x86_64/stable\nenabled=1\ngpgcheck=1\ngpgkey=https://rpm.releases.hashicorp.com/gpg" | tee /etc/yum.repos.d/hashicorp.repo
 
