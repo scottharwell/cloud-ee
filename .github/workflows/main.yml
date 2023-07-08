@@ -1,5 +1,5 @@
 ---
-name: Build CI on tag
+name: Build CI on Release
 
 "on":
   push:
