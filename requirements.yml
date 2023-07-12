@@ -22,15 +22,15 @@ collections:
     source: https://github.com/ansible-collections/cloud.terraform.git
   - name: community.aws
     version: 6.0.0
+  - name: community.digitalocean
+    version: 1.23.0
   - name: community.general
     version: 7.1.0
-  - name: oracle.oci
-    version: 4.26.0
   - name: google.cloud
     version: 1.2.0
   - name: linode.cloud
     version: 0.17.0
-  - name: community.digitalocean
-    version: 1.23.0
+  - name: oracle.oci
+    version: 4.26.0
   - name: vultr.cloud
     version: 1.8.0
