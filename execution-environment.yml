@@ -26,14 +26,16 @@ additional_build_files:
 
 additional_build_steps:
   append_base: |
+    RUN echo "Target architecture is: $TARGETARCH"
+
     # Configure Terraform Repo
-    RUN echo -e "[hashicorp]\nname=Hashicorp Stable - $basearch\nbaseurl=https://rpm.releases.hashicorp.com/RHEL/8/x86_64/stable\nenabled=1\ngpgcheck=1\ngpgkey=https://rpm.releases.hashicorp.com/gpg" | tee /etc/yum.repos.d/hashicorp.repo
+    RUN curl -o /etc/yum.repos.d/hashicorp.repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 
     # Configure Azure CLI Repo
-    RUN echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | tee /etc/yum.repos.d/azure-cli.repo
+    RUN rpm -i https://packages.microsoft.com/config/rhel/9.0/packages-microsoft-prod.rpm
 
     # Configure Google Cloud Repo
-    RUN echo -e "[google-cloud-cli]\nname=Google Cloud CLI\nbaseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el8-x86_64\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=0\ngpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg" | tee /etc/yum.repos.d/google-cloud-sdk.repo
+    RUN echo -e "[google-cloud-cli]\nname=Google Cloud CLI\nbaseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el\$releasever-\$basearch\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=0\ngpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg" | tee /etc/yum.repos.d/google-cloud-sdk.repo
 
   prepend_galaxy: |
     COPY _build/configs/ansible.cfg /etc/ansible/ansible.cfg
@@ -47,8 +49,7 @@ additional_build_steps:
     RUN az extension add --name connectedmachine -y
 
     # Install AWS CLI
-    # RUN if [ $TARGETARCH == "arm64" ]; then curl -L "https://awscli.amazonaws.com/awscli-exe-linux-aarch64-2.9.0.zip" -o "awscliv2.zip"; else curl -L "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.9.0.zip" -o "awscliv2.zip"; fi
-    RUN curl -L "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    RUN if [ $TARGETARCH == "arm64" ]; then curl -L "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"; else curl -L "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"; fi
     RUN unzip awscliv2.zip
     RUN ./aws/install
     RUN rm awscliv2.zip

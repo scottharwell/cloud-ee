@@ -6,7 +6,9 @@ This is execution environment definition for automation against cloud infrastruc
 
 ## Requirements
 
-As of version `v3.0.0` of this EE, `ansible-builder` version `3.0.0` or greater is required.
+The following are local requirements for the build host/system.  These **are not** requirements for the collections or dependencies published inside of the container/ee.
+
+* ansible-builder>=3.0.0
 
 ## Included Content
 
@@ -59,7 +61,7 @@ docker login registry.redhat.io
 
 The execution environment also pulls collections from Automation Hub and requires that an [Automation Hub token](https://console.redhat.com/ansible/automation-hub/token) is supplied via the `ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN` environment variable.  Ensure that the environment variable does not have any whitespace or extra characters when you set the variable.
 
-### Intel or AMD `amd64` on Linux or Mac
+### Intel or AMD `amd64` Architectures
 
 Ansible Builder will function out-of-the-box on `amd64` platforms with Podman or Docker.
 
@@ -69,9 +71,11 @@ Ansible Builder will function out-of-the-box on `amd64` platforms with Podman or
 4. Ensure that you have set the `ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN` environment variable.
 5. Run `ansible-builder build --build-arg ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN=$ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN -t <YOUR_TAG_HERE>`.
 
-### Apple Silicon
+### Apple Silicon or `arm64` Architectures
 
-This requires Docker to build EEs. Podman does not function with these steps on an Apple Silicon Mac at this time.  This process will build a multi-platform container on an Apple Silicon Mac that will then function on either an `amd64` or `arm64` platform that virtualizes the `amd64/x86` dependencies, such as the CLI tools.
+The `azure.azure_rm` collection uses Python dependencies that do not have `arm64` equivalents at this time; a pure `arm64` build will fail during the build phase.  Therefore, building a *native* `arm64` container is blocked.
+
+However, it is possible to build an `arm64` compatible container that emulates `amd64` to circumvent this issue and eliminates the need to pass a platform flag to the container runtime.  This requires Docker to build EEs. Podman does not function with these steps on an Apple Silicon Mac at this time.  This process will build a multi-platform container on ARM architectures that will then function on either an `amd64` or `arm64` platform.
 
 1. Run `git clone https://github.com/scottharwell/cloud-ee.git` to clone this repository.
 2. Run `cd cloud-ee` to change into the repository directory.

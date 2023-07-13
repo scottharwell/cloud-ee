@@ -1,7 +1,4 @@
 azure-cli
 google-cloud-cli
-python-dnf
 terraform
 unzip
-wget
-which

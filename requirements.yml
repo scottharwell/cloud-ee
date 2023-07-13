@@ -31,6 +31,6 @@ collections:
   - name: linode.cloud
     version: 0.17.0
   - name: oracle.oci
-    version: 4.26.0
+    version: 4.27.0
   - name: vultr.cloud
     version: 1.8.0
