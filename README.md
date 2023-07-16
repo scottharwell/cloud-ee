@@ -1,14 +1,76 @@
 [![Build CI](https://github.com/scottharwell/cloud-ee/actions/workflows/main.yml/badge.svg)](https://github.com/scottharwell/cloud-ee/actions/workflows/build.yml)
 
-# Cloud Content Execution Environment
+# Ansible Cloud Content Execution Environment
 
-This is execution environment definition for automation against cloud infrastructure providers and other collections and roles from the Ansible team to help incubate cloud content.
+This is an Ansible execution environment that contains collections to automate cloud infrastructure and supporting collections to help incubate cloud content.  It is automatically published to [quay.io](https://quay.io/repository/scottharwell/cloud-ee) when new versions are published.
 
 ## Requirements
 
-The following are local requirements for the build host/system.  These **are not** requirements for the collections or dependencies published inside of the container/ee.
+The following are requirements for the build host/system if you intend to build this EE locally.  These **are not** requirements for the collections or dependencies published inside of the container/ee.
 
 * ansible-builder>=3.0.0
+
+## Using the Execution Environment
+
+### Ansible Automation Platform
+
+Follow these steps to use the execution environment in Ansible Automation Platform:
+
+1. Login to Ansible Automation Controller.
+2. Click Execution Environments in the left menu.
+3. Click the "Add" button.
+4. Fill in the name field: `Cloud EE`
+5. Fill in the image field: `quay.io/scottharwell/cloud-ee:latest`
+   1. You can change `latest` to a version tag to ensure that changes to the EE don't affect your automation without your explicit action.
+6. Optional: Change the pull field `Always` so that the latest version of the container is pulled if you are using the `latest` tag.
+
+### Ansible CLI
+
+You can reference the execution environment when running your automation locally with `ansible-navigator`.  Use the documentation for `ansible-navigator` to determine which flags to set for your playbook.  However, the three important flags for using an execution environment are:
+
+* `--ee`: Tells Ansible Navigator to use an execution environment
+* `--ce`: Tells Ansible Navigator which container engine to use
+* `--eei`: Tells Ansible Navigator which image to use
+
+The `--pp` flag is also useful to tell Ansible Navigator to attempt to pull the container on each run.  This is useful since this execution environment is updated frequently.
+
+```bash
+ansible-navigator run create_network.yml \
+--pae false \
+--mode stdout \
+--ee true \
+--ce docker \
+--pp always \
+--eei quay.io/scottharwell/cloud-ee:latest
+```
+
+### Using Container Engines
+
+You may pull the container without building it locally by running the pull command.  Use `podman` or `docker` based on the container engine that you use.
+
+```bash
+podman pull quay.io/scottharwell/cloud-ee
+```
+
+```bash
+docker pull quay.io/scottharwell/cloud-ee
+```
+
+Then, you may enter the container and use it directly.
+
+```bash
+docker run -it \
+--rm \
+--pull always \
+quay.io/scottharwell/cloud-ee:latest \
+/bin/bash
+```
+
+Once inside the container, you can use the Ansible CLI tools.  Below is an example of checking the collections installed in the container.
+
+```bash
+ansible-galaxy collection list
+```
 
 ## Included Content
 
