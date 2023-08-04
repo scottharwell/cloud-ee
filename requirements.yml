@@ -21,7 +21,7 @@ collections:
     type: git
     source: https://github.com/ansible-collections/cloud.terraform.git
   - name: community.aws
-    version: 6.1.0
+    version: 6.2.0
   - name: community.digitalocean
     version: 1.23.0
   - name: community.general
