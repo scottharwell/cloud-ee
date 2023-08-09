@@ -1,5 +1,4 @@
 azure-cli
-curl
 google-cloud-cli
 terraform
 unzip
