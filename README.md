@@ -2,11 +2,11 @@
 
 # Ansible Cloud Content Execution Environment
 
-This is an Ansible execution environment that contains collections to automate cloud infrastructure and supporting collections to help incubate cloud content.  It is automatically published to [quay.io](https://quay.io/repository/scottharwell/cloud-ee) when new versions are published.
+This is an Ansible execution environment that contains collections to automate cloud infrastructure and supporting collections to help incubate cloud content.  It is automatically published to [quay.io](https://quay.io/repository/scottharwell/cloud-ee) when new versions of this definition are created.
 
-## Requirements
+## Dependencies
 
-The following are requirements for the build host/system if you intend to build this EE locally.  These **are not** requirements for the collections or dependencies published inside of the container/ee.
+The following are Dependencies for the build host/system if you intend to build this EE locally.  These **are not** requirements for the collections or dependencies published inside of the container/ee.
 
 * ansible-builder>=3.0.0
 
@@ -21,7 +21,7 @@ Follow these steps to use the execution environment in Ansible Automation Platfo
 3. Click the "Add" button.
 4. Fill in the name field: `Cloud EE`
 5. Fill in the image field: `quay.io/scottharwell/cloud-ee:latest`
-   1. You can change `latest` to a version tag to ensure that changes to the EE don't affect your automation without your explicit action.
+   * You can change `latest` to a version tag to ensure that changes to the EE don't affect your automation without your explicit action.
 6. Optional: Change the pull field `Always` so that the latest version of the container is pulled if you are using the `latest` tag.
 
 ### Ansible CLI
@@ -109,9 +109,9 @@ The following CLI tools are included in this execution environment.
 
 The following CLI tools are installed into Python virtual environments (venv).  To access them within the venv, run the activation command below.
 
-| CLI Command | venv Name    | Activation Command               |
-| ----------- | ------------ | -------------------------------- |
-| `oci`       | `oracle-cli` | `source oracle-cli/bin/activate` |
+| CLI Command | venv Name    | Activation Command                            |
+| ----------- | ------------ | --------------------------------------------- |
+| `oci`       | `oracle-cli` | `source /home/runner/oracle-cli/bin/activate` |
 
 ## Building the Execution Environment
 
@@ -135,7 +135,7 @@ Ansible Builder will function out-of-the-box on `amd64` platforms with Podman or
 
 ### Apple Silicon or `arm64` Architectures
 
-The `azure.azure_rm` collection uses Python dependencies that do not have `arm64` equivalents at this time; a pure `arm64` build will fail during the build phase.  Therefore, building a *native* `arm64` container is blocked.
+The `azure.azure_rm` collection and Azure CLI use Python dependencies that do not have `arm64` equivalents at this time; a pure `arm64` build will fail during the build phase.  Therefore, building a *native* `arm64` container is blocked.
 
 However, it is possible to build an `arm64` compatible container that emulates `amd64` to circumvent this issue and eliminates the need to pass a platform flag to the container runtime.  This requires Docker to build EEs. Podman does not function with these steps on an Apple Silicon Mac at this time.  This process will build a multi-platform container on ARM architectures that will then function on either an `amd64` or `arm64` platform.
 
