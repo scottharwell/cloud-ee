@@ -23,7 +23,7 @@ collections:
   - name: community.aws
     version: 6.2.0
   - name: community.digitalocean
-    version: 1.23.0
+    version: 1.24.0
   - name: community.general
     version: 7.2.1
   - name: google.cloud
