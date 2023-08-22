@@ -13,7 +13,7 @@ collections:
   - name: ansible.controller
     version: 4.4.0
   - name: ansible.windows
-    version: 2.0.0
+    version: 2.1.0
   - name: awx.awx
     version: 22.7.0
   - name: cloud.terraform
