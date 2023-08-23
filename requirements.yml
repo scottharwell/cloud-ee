@@ -9,7 +9,7 @@ collections:
   - name: ansible.utils
     version: 2.10.3
   - name: azure.azcollection
-    version: 1.16.0
+    version: 1.17.0
   - name: ansible.controller
     version: 4.4.0
   - name: ansible.windows
