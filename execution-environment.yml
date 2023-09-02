@@ -44,6 +44,10 @@ additional_build_steps:
     ARG ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN
 
   append_final: |
+    # Use Python 3.11 as default
+    RUN rm -f /bin/python3
+    RUN ln -s /bin/python3.11 /bin/python3
+
     # Install the Azure Connected Machine Extension
     RUN az config set extension.use_dynamic_install=yes_without_prompt
     RUN az extension add --name connectedmachine -y
