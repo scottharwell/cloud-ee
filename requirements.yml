@@ -1,7 +1,7 @@
 ---
 collections:
   - name: amazon.aws
-    version: 6.3.0
+    version: 6.4.0
   - name: amazon.cloud
     version: 0.4.0
     type: git
@@ -21,7 +21,7 @@ collections:
     type: git
     source: https://github.com/ansible-collections/cloud.terraform.git
   - name: community.aws
-    version: 6.2.0
+    version: 6.3.0
   - name: community.digitalocean
     version: 1.24.0
   - name: community.general
@@ -29,7 +29,7 @@ collections:
   - name: google.cloud
     version: 1.2.0
   - name: linode.cloud
-    version: 0.18.3
+    version: 0.19.0
   - name: oracle.oci
     version: 4.29.0
   - name: vultr.cloud
