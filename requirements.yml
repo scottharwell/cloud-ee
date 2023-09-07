@@ -7,7 +7,7 @@ collections:
     type: git
     source: https://github.com/ansible-collections/amazon.cloud.git
   - name: ansible.utils
-    version: 2.10.3
+    version: 2.11.0
   - name: azure.azcollection
     version: 1.17.0
   - name: ansible.controller
