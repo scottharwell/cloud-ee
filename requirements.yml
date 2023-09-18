@@ -33,4 +33,4 @@ collections:
   - name: oracle.oci
     version: 4.30.0
   - name: vultr.cloud
-    version: 1.9.0
+    version: 1.10.0
