@@ -15,7 +15,7 @@ collections:
   - name: ansible.windows
     version: 2.1.0
   - name: awx.awx
-    version: 23.1.0
+    version: 23.2.0
   - name: cloud.terraform
     version: 1.1.1
     type: git
