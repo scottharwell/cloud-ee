@@ -1,7 +1,7 @@
 ---
 collections:
   - name: amazon.aws
-    version: 6.5.0
+    version: 7.0.0
   - name: amazon.cloud
     version: 0.4.0
     type: git
@@ -31,6 +31,6 @@ collections:
   - name: linode.cloud
     version: 0.21.0
   - name: oracle.oci
-    version: 4.34.0
+    version: 4.35.0
   - name: vultr.cloud
     version: 1.10.0
