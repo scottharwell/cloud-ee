@@ -3,8 +3,6 @@ name: Build CI on Release
 
 "on":
   push:
-    tags:
-      - v*
 
 env:
   REGISTRY: quay.io

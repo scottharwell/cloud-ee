@@ -21,7 +21,6 @@ Follow these steps to use the execution environment in Ansible Automation Platfo
 3. Click the "Add" button.
 4. Fill in the name field: `Cloud EE`
 5. Fill in the image field: `quay.io/scottharwell/cloud-ee:latest`
-   * You can change `latest` to a version tag to ensure that changes to the EE don't affect your automation without your explicit action.
 6. Optional: Change the pull field `Always` so that the latest version of the container is pulled if you are using the `latest` tag.
 
 ### Ansible CLI
@@ -78,22 +77,25 @@ ansible-galaxy collection list
 
 The following collections are included in this execution environment.
 
-| Collection           | Description                                                 |
-| -------------------- | ----------------------------------------------------------- |
-| `amazon.aws`         | Used for AWS automation.                                    |
-| `amazon.cloud`       | Newer AWS collection using the cloud control API.           |
-| `ansible.utils`      | Ansible general utilities.                                  |
-| `ansible.controller` | Used for Ansible Controller automation.                     |
-| `ansible.windows`    | Windows collection for automating Windows servers on Azure. |
-| `awx.awx`            | Used for AWX automation.                                    |
-| `azure.azcollection` | Used for Azure automation.                                  |
-| `cloud.terraform`    | Used for automating Terraform with Ansible.                 |
-| `community.aws`      | Used for AWS automation.                                    |
-| `community.general`  | Used for Proxmox and other community automation.            |
-| `google.cloud`       | Used for Google Cloud automation.                           |
-| `linode.cloud`       | Used for Linode automation.                                 |
-| `oracle.oci`         | Used for OCI automation.                                    |
-| `vultr.cloud`        | Used for Vultr automation.                                  |
+| Collection                             | Description                                                 |
+| -------------------------------------- | ----------------------------------------------------------- |
+| `amazon.aws`                           | Used for AWS automation.                                    |
+| `amazon.cloud`                         | Newer AWS collection using the cloud control API.           |
+| `ansible.utils`                        | Ansible general utilities.                                  |
+| `ansible.controller`                   | Used for Ansible Controller automation.                     |
+| `ansible.windows`                      | Windows collection for automating Windows servers on Azure. |
+| `awx.awx`                              | Used for AWX automation.                                    |
+| `azure.azcollection`                   | Used for Azure automation.                                  |
+| `cloud.terraform`                      | Used for automating Terraform with Ansible.                 |
+| `community.aws`                        | Used for AWS automation.                                    |
+| `community.general`                    | Used for Proxmox and other community automation.            |
+| `google.cloud`                         | Used for Google Cloud automation.                           |
+| `lab.aws_infrastructure_demo_config`   | Ansible Content Lab AWS content.                            |
+| `lab.azure_infrastructure_demo_config` | Ansible Content Lab AWS content.                            |
+| `lab.controller_demo_config`           | Ansible Content Lab Controller configuration content.       |
+| `linode.cloud`                         | Used for Linode automation.                                 |
+| `oracle.oci`                           | Used for OCI automation.                                    |
+| `vultr.cloud`                          | Used for Vultr automation.                                  |
 
 ### CLI Tools
 
@@ -150,8 +152,7 @@ However, it is possible to build an `arm64` compatible container that emulates `
 
    ```bash
    export REGISTRY=quay.io/scottharwell
-   export VERSION=1.0.0
-   docker buildx build --no-cache --platform linux/arm64,linux/amd64 --build-arg ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN=$ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN -t $REGISTRY/cloud-ee:$VERSION -t $REGISTRY/cloud-ee:latest --push .
+   docker buildx build --no-cache --platform linux/arm64,linux/amd64 --build-arg ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN=$ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN -t $REGISTRY/cloud-ee:latest --push .
    ```
 
 9. Run `docker pull $REGISTRY/cloud-ee:$VERSION` to pull the image to your machine.
