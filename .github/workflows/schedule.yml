@@ -1,9 +1,9 @@
 ---
-name: Build CI on Release
+name: Build CI on Schedule
 
 "on":
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 2 * * 0'
 
 env:
   REGISTRY: quay.io
