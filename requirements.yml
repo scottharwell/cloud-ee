@@ -18,6 +18,9 @@ collections:
   - name: google.cloud
   - name: lab.aws_infrastructure_demo_config
     type: git
+    source: https://github.com/ansible-content-lab/aws_deployment.git
+  - name: lab.aws_deployment
+    type: git
     source: https://github.com/ansible-content-lab/aws.infrastructure_config_demos.git
   - name: lab.azure_infrastructure_demo_config
     type: git
