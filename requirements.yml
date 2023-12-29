@@ -15,6 +15,7 @@ collections:
   - name: community.aws
   - name: community.digitalocean
   - name: community.general
+  - name: containers.podman
   - name: google.cloud
   - name: lab.aws_deployment
     type: git
@@ -28,6 +29,9 @@ collections:
   - name: lab.controller_demo_config
     type: git
     source: https://github.com/ansible-content-lab/aoc.controller_demo_config.git
+  - name: lab.osbuild
+    type: git
+    source: https://github.com/scottharwell/lab.osbuild.git
   - name: linode.cloud
   - name: oracle.oci
   - name: vultr.cloud
