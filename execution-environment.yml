@@ -6,7 +6,7 @@ dependencies:
   python: requirements.txt
   system: bindep.txt
   ansible_core:
-    package_pip: ansible-core==2.16.4
+    package_pip: ansible-core==2.16.5
   ansible_runner:
     package_pip: ansible-runner==2.3.6
   python_interpreter:
