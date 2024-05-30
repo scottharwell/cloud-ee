@@ -1,10 +1,10 @@
 ---
 repos:
   - repo: https://github.com/igorshubovych/markdownlint-cli.git
-    rev: v0.37.0
+    rev: v0.41.0
     hooks:
       - id: markdownlint
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.32.0
+    rev: v1.35.1
     hooks:
       - id: yamllint
