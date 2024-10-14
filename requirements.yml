@@ -8,7 +8,6 @@ collections:
   - name: azure.azcollection
   - name: ansible.controller
   - name: ansible.windows
-  - name: awx.awx
   - name: cloud.terraform
     type: git
     source: https://github.com/ansible-collections/cloud.terraform.git
