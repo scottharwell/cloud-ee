@@ -45,8 +45,14 @@ jobs:
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
 
+      - name: Create a vEnv
+        run: python3 -m venv ~/venv
+
+      - name: Enter vEnv
+        run: source ~/venv/bin/activate
+
       - name: Install ansible-builder
-        run: pip3 install --user ansible-builder>=3.0.0
+        run: pip3 install ansible-builder>=3.0.0
 
       - name: Create the Containerfile file
         run: ansible-builder create --output-filename Dockerfile
