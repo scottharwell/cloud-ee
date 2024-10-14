@@ -48,14 +48,11 @@ jobs:
       - name: Create a vEnv
         run: python3 -m venv ~/venv
 
-      - name: Enter vEnv
-        run: source ~/venv/bin/activate
-
       - name: Install ansible-builder
-        run: pip3 install ansible-builder>=3.0.0
+        run: ~/venv/bin/pip3 install ansible-builder>=3.0.0
 
       - name: Create the Containerfile file
-        run: ansible-builder create --output-filename Dockerfile
+        run: ~/venv/bin/ansible-builder create --output-filename Dockerfile
 
       - name: Ensure that FROM pulls the amd64 image since there is no arm64 upstream image
         run: sed -i 's/FROM /FROM --platform=linux\/amd64 /g' context/Dockerfile
