@@ -4,15 +4,19 @@ collections:
   - name: amazon.cloud
     type: git
     source: https://github.com/ansible-collections/amazon.cloud.git
-  - name: ansible.utils
-  - name: azure.azcollection
   - name: ansible.controller
+  #- name: ansible.eda
+  - name: ansible.hub
+  - name: ansible.platform
+  - name: ansible.posix
+  - name: ansible.receptor
+  - name: ansible.utils
   - name: ansible.windows
+  - name: azure.azcollection
   - name: cloud.terraform
     type: git
     source: https://github.com/ansible-collections/cloud.terraform.git
   - name: community.aws
-  - name: community.digitalocean
   - name: community.general
   - name: containers.podman
   - name: google.cloud
@@ -31,6 +35,4 @@ collections:
   - name: lab.osbuild
     type: git
     source: https://github.com/scottharwell/lab.osbuild.git
-  - name: linode.cloud
   - name: oracle.oci
-  - name: vultr.cloud
