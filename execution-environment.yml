@@ -6,9 +6,9 @@ dependencies:
   python: requirements.txt
   system: bindep.txt
   ansible_core:
-    package_pip: ansible-core==2.17.4
+    package_pip: ansible-core==2.18.10
   ansible_runner:
-    package_pip: ansible-runner==2.4.0
+    package_pip: ansible-runner==2.4.1
   python_interpreter:
     package_system: "python3.11"
     python_path: "/usr/bin/python3.11"
@@ -61,9 +61,9 @@ additional_build_steps:
 
     # Install OCI CLI
     RUN /usr/bin/python3.11 -m venv /home/runner/oracle-cli --clear --upgrade-deps
-    ENV VIRTUAL_ENV /home/runner/oracle-cli
+    ENV VIRTUAL_ENV=/home/runner/oracle-cli
     RUN /home/runner/oracle-cli/bin/pip3 install oci-cli
-    ENV VIRTUAL_ENV ""
+    ENV VIRTUAL_ENV=""
 
     # Output collections list for debugging
     RUN ansible-galaxy collection list

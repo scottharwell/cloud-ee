@@ -4,9 +4,9 @@ collections:
   - name: amazon.cloud
     type: git
     source: https://github.com/ansible-collections/amazon.cloud.git
-  - name: ansible.controller
+  #- name: ansible.controller
   #- name: ansible.eda
-  - name: ansible.hub
+  #- name: ansible.hub
   - name: ansible.platform
   - name: ansible.posix
   - name: ansible.receptor
